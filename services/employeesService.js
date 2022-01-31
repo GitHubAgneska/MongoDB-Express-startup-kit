@@ -10,7 +10,7 @@ module.exports.createEmployee = async employeeData => {
         // ( see https://stackoverflow.com/questions/45015613/error-data-and-salt-arguments-required/45015918)
         // const hashPassword = await bcrypt.hash(employeeData.password, 12)
         // => removing the 'await' keyword allows request to succeed (200 - user created)
-        const hashPassword = bcrypt.hash(employeeData.password, 12)
+        // const hashPassword = bcrypt.hash(employeeData.password, 12)
 
         const newEmployee = new Employee({
             firstName: employeeData.firstName,

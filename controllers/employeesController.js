@@ -4,7 +4,7 @@ module.exports.createEmployee = async (req, res) => {
     let response = {}
 
     try {
-        const responseFromService = await employeesService.createUser(req.body)
+        const responseFromService = await employeesService.createEmployee(req.body)
         response.status = 200
         response.message = 'Employee successfully created'
         response.body = responseFromService

@@ -22,7 +22,7 @@ router.get('/', async (_, res) => {
  * @desc    Create an employee
  * @access  Public
  */
-router.post('/', async (req, res) => {employeesController.createEmployee})
+router.post('/', employeesController.createEmployee)
 
 
 

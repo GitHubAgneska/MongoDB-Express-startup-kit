@@ -15,13 +15,15 @@ app.use(express.json())
 app.use(cors())
 
 const mongoose = require('mongoose')
-const { MONGO_URI } = config;
-const uri = MONGO_URI;
+/* const { MONGO_URI } = config;
+const uri = MONGO_URI; */
+const uri = process.env.MONGO_URI
 const localDbUrl = process.env.DATABASE_URL_DEV
 // Connect to Mongo
 mongoose
-    .connect(localDbUrl, {
-        useNewUrlParser: true
+    .connect(uri, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
     }) // Adding new mongo url parser
     .then(() => console.log('MongoDB Connected...'))
     .catch(err => console.log(err));

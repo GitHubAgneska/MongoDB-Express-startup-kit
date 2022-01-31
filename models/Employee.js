@@ -1,12 +1,12 @@
-import { Schema, model } from 'mongoose';
+const mongoose = require('mongoose')
 
 // Create Schema
-const EmployeeSchema = new Schema({
-  firstname: {
+const EmployeeSchema = new mongoose.Schema({
+  firstName: {
     type: String,
     required: true
   },
-  lastname: {
+  lastName: {
     type: String,
     required: true
   },
@@ -34,6 +34,4 @@ const EmployeeSchema = new Schema({
   }
 });
 
-const Employee = model('user', EmployeeSchema);
-
-export default Employee;
+module.exports = mongoose.model('Employee', EmployeeSchema)

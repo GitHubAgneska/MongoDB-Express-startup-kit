@@ -7,6 +7,8 @@
     "client-install": "npm install --prefix client",
     "start": "node server.js",
     "server": "nodemon server.js --exec babel-node --presets=@babel/env --ignore client",
+    "dev:server": "nodemon ./server/server.js",
+    "populate-db": "node scripts/populateDatabase.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
@@ -14,15 +16,19 @@
   "author": "hag",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.25.0",
     "babel-preset-env": "^1.7.0",
     "body-parser": "^1.19.1",
     "concurrently": "^7.0.0",
+    "config": "^3.3.7",
     "cors": "^2.8.5",
     "dotenv": "^14.3.2",
     "express": "^4.17.2",
     "faker": "^6.6.6",
     "idx": "^2.5.6",
     "miragejs": "^0.1.43",
+    "mongoose": "^6.1.8",
+    "node-fetch": "^3.2.0",
     "seedrandom": "^3.0.5",
     "serve-favicon": "^2.5.0"
   },

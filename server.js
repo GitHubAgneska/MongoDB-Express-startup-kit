@@ -1,33 +1,38 @@
 const express = require('express')
 require('dotenv').config()
-const PORT = process.env.PORT || 5000
 const cors = require('cors')
 const path = require('path')
 const config = require('./config')
+const { PORT } = config;
 const favicon = require('serve-favicon')
+
+// routes
+const employeesRoute = require('./routes/employees')
 
 const app = express()
 
 app.use(express.json())
 app.use(cors())
 
-
-const { MongoClient } = require('mongodb');
+const mongoose = require('mongoose')
 const { MONGO_URI } = config;
 const uri = MONGO_URI;
+const localDbUrl = process.env.DATABASE_URL_DEV
+// Connect to Mongo
+mongoose
+    .connect(localDbUrl, {
+        useNewUrlParser: true
+    }) // Adding new mongo url parser
+    .then(() => console.log('MongoDB Connected...'))
+    .catch(err => console.log(err));
 
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-client.connect(err => {
-    const collection = client.db("hrnet").collection("employees");
-    // perform actions on the collection object
-    collection.insertOne()
-    client.close();
-});
+    const db = mongoose.connection
+    db.on('error', console.error.bind(console, 'DB connection error:'))
+    db.once('open', function() { console.log("DB Connection Successful!"); });
 
-const userRoutes = require('./routes');
+
 // Use Routes
-app.use('/api/user', userRoutes)
-
+app.use('/api/employees', employeesRoute)
 
 
 // Serve the static if in production
